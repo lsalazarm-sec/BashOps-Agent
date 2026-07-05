@@ -33,6 +33,9 @@
 > The agent runs `kubectl` and `df` under the hood, reasons about the output, and responds in plain English. No copy-pasting commands, no tab switching.
 
 ### Prometheus — metrics and monitoring queries
+
+<img width="1055" height="207" alt="image" src="https://github.com/user-attachments/assets/dfb6d3dc-8320-4c14-8573-192bc72e62ae" />
+
 ![Prometheus demo](docs/demo/prometheus-demo.gif)
 
 > The agent queries Prometheus directly via PromQL to check target health and resource metrics.
