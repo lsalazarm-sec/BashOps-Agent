@@ -10,6 +10,7 @@ import httpx
 
 from infra_copilot.config import Settings
 from infra_copilot.tools.kubectl import kubectl_run
+from infra_copilot.tools.prometheus import prometheus_query
 from infra_copilot.tools.shell import shell_run
 
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -26,6 +27,16 @@ TOOL: shell
   binary: string (journalctl, systemctl, ps, ss, df, free, uptime, ip)
   args: list of strings
 
+TOOL: prometheus
+  query: string (a valid PromQL query)
+  Use this tool for ANY question about metrics, monitoring, uptime, resource usage
+  over time, or cluster health as tracked by Prometheus. Prefer this tool over shell
+  when the question mentions Prometheus, metrics, monitoring, or "is X up".
+  Common queries:
+    - "up" -> lists all monitored targets and whether they are up (1) or down (0)
+    - "node_memory_MemAvailable_bytes" -> available memory in bytes
+    - "rate(container_cpu_usage_seconds_total[5m])" -> CPU usage rate
+
 STRICT OUTPUT RULES:
 - If you need a tool, output ONLY the JSON on its own line. No intro, no explanation.
 - If you have enough information, respond conversationally in markdown. Adapt your answer to the question:
@@ -39,6 +50,7 @@ STRICT OUTPUT RULES:
 Tool call examples (output exactly like this, nothing else):
 {"tool": "kubectl", "verb": "get", "args": ["pods", "-n", "default"]}
 {"tool": "shell", "binary": "df", "args": ["-h"]}
+{"tool": "prometheus", "query": "up"}
 """
 
 
@@ -124,6 +136,13 @@ async def ask(prompt: str, settings: Settings) -> str:
             result = await shell_run(
                 binary=tool_call.get("binary", ""),
                 args=tool_call.get("args", []),
+                settings=settings,
+            )
+            tool_output = result.model_dump_json(indent=2)
+
+        elif tool_name == "prometheus":
+            result = await prometheus_query(
+                query=tool_call.get("query", ""),
                 settings=settings,
             )
             tool_output = result.model_dump_json(indent=2)

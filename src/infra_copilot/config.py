@@ -48,6 +48,7 @@ class Settings(BaseModel):
     llm: LLMConfig = Field(default_factory=LLMConfig)
     safety: SafetyConfig = Field(default_factory=SafetyConfig)
     kubeconfig: str | None = None
+    prometheus_url: str = "http://localhost:9090"
 
     @classmethod
     def load(cls, path: Path | None = None) -> Settings:
