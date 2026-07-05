@@ -32,6 +32,13 @@
 
 > The agent runs `kubectl` and `df` under the hood, reasons about the output, and responds in plain English. No copy-pasting commands, no tab switching.
 
+### Prometheus — metrics and monitoring queries
+![Prometheus demo](docs/demo/prometheus-demo.gif)
+
+> The agent queries Prometheus directly via PromQL to check target health and resource metrics.
+> Note: in local `kind` clusters, control-plane components (etcd, kube-scheduler, kube-proxy)
+> often show as "down" in Prometheus because they don't expose metrics endpoints by default —
+> this is a kind limitation, not an actual cluster issue.
 ---
 
 ## Why this exists
@@ -55,6 +62,7 @@ Built and tested on an AMD Radeon RX 7700 XT with ROCm 7.x on Ubuntu 24.04.
 - 🖥️ **TUI + CLI** — interactive Textual UI for conversations, one-shot CLI for scripting.
 - 🔄 **ReAct reasoning loop** — the agent iterates: decide → execute tool → reason about output → decide again, until it has a complete answer.
 - 🐧 **Linux-first, AMD-ready** — built on Ubuntu 24.04 with ROCm 7.x. Works with NVIDIA and CPU too.
+- 📊 **Prometheus integration** — query metrics and monitor cluster health via PromQL
 
 ---
 
@@ -212,7 +220,7 @@ See [docs/rocm-setup.md](docs/rocm-setup.md) for the full setup guide from scrat
 - [x] Adaptive response format
 
 ### v0.2 — Observability
-- [ ] Prometheus / PromQL tool
+- [x] Prometheus / PromQL tool
 - [ ] Node metrics and resource pressure detection
 - [ ] Multi-cluster context switching
 
