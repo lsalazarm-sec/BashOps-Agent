@@ -122,7 +122,8 @@ copilot version          Print version
 
 ##  Architecture
 
-<img width="1744" height="1770" alt="Diagram" src="https://github.com/user-attachments/assets/99cfe781-f5d0-4bdb-8570-85e3944febd4" />
+<img width="1744" height="1770" alt="Diagram" src="https://github.com/user-attachments/assets/452b9cc2-97df-4d9b-8bc1-c1d4692d0a57" />
+
 
 The agent uses a **ReAct (Reason + Act) loop**, it reasons about what information it needs, calls a tool, gets real output, and reasons again. 
 This means answers are always grounded in actual system state, not hallucinated.
