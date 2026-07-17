@@ -122,29 +122,8 @@ copilot version          Print version
 
 ##  Architecture
 
-```bash
-User question (CLI / TUI)
-│
-▼
-┌─────────────────────────────────────┐
-│         ReAct Agent Loop            │
-│                                     │
-│  1. Send prompt to LLM              │
-│  2. Parse tool call from response   │
-│  3. Execute tool with safety check  │
-│  4. Feed output back to LLM         │
-│  5. Repeat until final answer       │
-└──────────────┬──────────────────────┘
-│
-┌────────┴────────┐
-▼                 ▼
-Ollama API         Tool Router
-(local GPU)        │
-Qwen 2.5           ├── kubectl (get, describe, logs...)
-Coder 14B          ├── shell (journalctl, df, ps, ss...)
-└── audit log (JSONL)
+<img width="1733" height="1770" alt="Diagram" src="https://github.com/user-attachments/assets/818869e8-f586-4c47-a6bf-d603127c998c" />
 
-```
 
 The agent uses a **ReAct (Reason + Act) loop** — it reasons about what information it needs, calls a tool, gets real output, and reasons again. 
 This means answers are always grounded in actual system state, not hallucinated.
