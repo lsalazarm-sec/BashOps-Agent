@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🤖 bashops-agent
+# 🤖 Bashops-Agent 🤖
 
 **Ask your infrastructure questions in plain text. Runs 100% locally on your GPU.**
 
@@ -18,23 +18,24 @@
 
 ---
 
-## 🎬 Demo
+## Demo
 
-### CLI — one-shot queries
+### CLI [+] One-Shot Queries [+]
 ![CLI demo](docs/demo/demo.gif)
 
 > Ask a question, get an answer. The agent runs `kubectl` and shell commands under the hood,
-> reasons about the real output, and responds in plain English. No copy-pasting, no tab switching.
+> reasons about the real output, and responds in plain English.
 
-### TUI — interactive session
+### TUI [+] Interactive Session [+]
 ![TUI demo](docs/demo/tui-demo.gif)
 
 > The interactive mode lets you have a back-and-forth conversation with your infrastructure.
 > Each question builds on the context of the session. Press `Ctrl+C` to exit.
 
-> The agent runs `kubectl` and `df` under the hood, reasons about the output, and responds in plain English. No copy-pasting commands, no tab switching.
+> The agent runs `kubectl` and `df` under the hood, reasons about the output, and responds in plain text.
+> No copy-pasting commands, no tab switching.
 
-### Prometheus — metrics and monitoring queries
+### Prometheus [+] Metrics and monitoring queries [+]
 
 <img width="1055" height="207" alt="image" src="https://github.com/user-attachments/assets/dfb6d3dc-8320-4c14-8573-192bc72e62ae" />
 
@@ -60,15 +61,15 @@ Built and tested on an AMD Radeon RX 7700 XT with ROCm 7.x on Ubuntu 24.04.
 
 ## Features
 
-- 🧠 **Local LLM inference** — Qwen 2.5 Coder 14B running on your GPU via Ollama. Swap models with one config change.
-- 🛠️ **Real tool execution** — the agent actually runs `kubectl`, `journalctl`, `df`, `ps`, `ss`, and more. Not a wrapper around `kubectl explain`.
-- 🔒 **Safety-first design** — read-only by default. Strict command allowlist. No shell string interpolation. Every action is audited.
-- 📋 **JSONL audit log** — every command, its arguments, output size, and latency logged to `~/.local/share/bashops-agent/audit.jsonl`.
-- 🖥️ **TUI + CLI** — interactive Textual UI for conversations, one-shot CLI for scripting.
-- 🔄 **ReAct reasoning loop** — the agent iterates: decide → execute tool → reason about output → decide again, until it has a complete answer.
-- 🐧 **Linux-first, AMD-ready** — built on Ubuntu 24.04 with ROCm 7.x. Works with NVIDIA and CPU too.
-- 📊 **Prometheus integration** — query metrics and monitor cluster health via PromQL
-- 📊 **Grafana dashboards** — production-grade Kubernetes and Prometheus dashboards included out of the box
+-  **Local LLM inference** — Qwen 2.5 Coder 14B running on your GPU via Ollama. Swap models with one config change.
+-  **Real tool execution** — the agent actually runs `kubectl`, `journalctl`, `df`, `ps`, `ss`, and more. Not a wrapper around `kubectl explain`.
+-  **Safety-first design** — read-only by default. Strict command allowlist. No shell string interpolation. Every action is audited.
+-  **JSONL audit log** — every command, its arguments, output size, and latency logged to `~/.local/share/bashops-agent/audit.jsonl`.
+-  **TUI + CLI** — interactive Textual UI for conversations, one-shot CLI for scripting.
+-  **ReAct reasoning loop** — the agent iterates: decide → execute tool → reason about output → decide again, until it has a complete answer.
+-  **Linux-first, AMD-ready** — built on Ubuntu 24.04 with ROCm 7.x. Works with NVIDIA and CPU too.
+-  **Prometheus integration** — query metrics and monitor cluster health via PromQL
+-  **Grafana dashboards** — production-grade Kubernetes and Prometheus dashboards included out of the box
 ---
 
 ## Quickstart
@@ -119,7 +120,7 @@ copilot version          Print version
 ```
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```bash
 User question (CLI / TUI)
@@ -145,13 +146,14 @@ Coder 14B          ├── shell (journalctl, df, ps, ss...)
 
 ```
 
-The agent uses a **ReAct (Reason + Act) loop** — it reasons about what information it needs, calls a tool, gets real output, and reasons again. This means answers are always grounded in actual system state, not hallucinated.
+The agent uses a **ReAct (Reason + Act) loop** — it reasons about what information it needs, calls a tool, gets real output, and reasons again. 
+This means answers are always grounded in actual system state, not hallucinated.
 
 See [docs/architecture.md](docs/architecture.md) for full design decisions and trade-offs.
 
 ---
 
-## 🛡️ Safety model
+##  Safety model
 
 Security is a first-class concern. The agent cannot do anything you haven't explicitly permitted.
 
@@ -163,11 +165,13 @@ Security is a first-class concern. The agent cannot do anything you haven't expl
 | No shell string interpolation | Always | Not overridable |
 | Audit log | Always on | `config.yaml` |
 
-> **Note:** This is not a substitute for proper RBAC. Use a least-privilege kubeconfig. The copilot inherits whatever permissions your kubectl context has.
+> **Note:** This is not a substitute for proper RBAC.
+>           Use a least-privilege kubeconfig.
+>           The copilot inherits whatever permissions your kubectl context has.
 
 ---
 
-## ⚙️ Configuration
+##  Configuration
 
 Default config is created at `~/.config/bashops-agent/config.yaml` by running `copilot init`:
 
@@ -227,6 +231,7 @@ See [docs/rocm-setup.md](docs/rocm-setup.md) for the full setup guide from scrat
 
 ### v0.2 — Observability
 - [x] Prometheus / PromQL tool
+- [x] Grafana dashboards (Cluster, Namespace, Prometheus health, API server SLOs)
 - [ ] Node metrics and resource pressure detection
 - [ ] Multi-cluster context switching
 
