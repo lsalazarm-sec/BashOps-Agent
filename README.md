@@ -143,11 +143,12 @@ Qwen 2.5           ├── kubectl (get, describe, logs...)
 Coder 14B          ├── shell (journalctl, df, ps, ss...)
 └── audit log (JSONL)
 
+```
+
 The agent uses a **ReAct (Reason + Act) loop** — it reasons about what information it needs, calls a tool, gets real output, and reasons again. This means answers are always grounded in actual system state, not hallucinated.
 
 See [docs/architecture.md](docs/architecture.md) for full design decisions and trade-offs.
 
-```
 ---
 
 ## 🛡️ Safety model
