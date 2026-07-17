@@ -2,7 +2,7 @@
 
 # 🤖 bashops-agent
 
-**Ask your infrastructure questions in plain English. Runs 100% locally on your GPU.**
+**Ask your infrastructure questions in plain text. Runs 100% locally on your GPU.**
 
 <img src="docs/icons/python.svg" width="28" height="28"> <img src="docs/icons/ollama.svg" width="28" height="28"> <img src="docs/icons/kubernetes.svg" width="28" height="28"> <img src="docs/icons/docker.svg" width="28" height="28"> <img src="docs/icons/prometheus.svg" width="28" height="28"> <img src="docs/icons/grafana.svg" width="28" height="28"> <img src="docs/icons/ubuntu.svg" width="28" height="28"> <img src="docs/icons/amd.svg" width="28" height="28"> <img src="docs/icons/github.svg" width="28" height="28">
 
