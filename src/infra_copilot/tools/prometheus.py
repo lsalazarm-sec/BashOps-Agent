@@ -29,7 +29,12 @@ class PrometheusError(BaseModel):
 
 
 async def prometheus_query(
-    query: Annotated[str, Field(description="A valid PromQL query, e.g. 'up' or 'rate(container_cpu_usage_seconds_total[5m])'")],
+    query: Annotated[
+        str,
+        Field(
+            description="A valid PromQL query, e.g. 'up' or 'rate(container_cpu_usage_seconds_total[5m])'"
+        ),
+    ],
     settings: Settings,
 ) -> PrometheusResult | PrometheusError:
     """Run a PromQL query against Prometheus and return the parsed result.
@@ -55,21 +60,36 @@ async def prometheus_query(
 
         if data.get("status") != "success":
             error = PrometheusError(query=query, error=str(data))
-            record(tool="prometheus", inputs={"query": query}, outputs=error.model_dump(),
-                   success=False, duration_ms=duration_ms)
+            record(
+                tool="prometheus",
+                inputs={"query": query},
+                outputs=error.model_dump(),
+                success=False,
+                duration_ms=duration_ms,
+            )
             return error
 
         result_type = data["data"]["resultType"]
         results = data["data"]["result"]
 
         result = PrometheusResult(query=query, result_type=result_type, results=results)
-        record(tool="prometheus", inputs={"query": query},
-               outputs={"result_count": len(results)}, success=True, duration_ms=duration_ms)
+        record(
+            tool="prometheus",
+            inputs={"query": query},
+            outputs={"result_count": len(results)},
+            success=True,
+            duration_ms=duration_ms,
+        )
         return result
 
     except httpx.HTTPError as e:
         duration_ms = (time.perf_counter() - start) * 1000
         error = PrometheusError(query=query, error=f"Connection failed: {e}")
-        record(tool="prometheus", inputs={"query": query}, outputs=error.model_dump(),
-               success=False, duration_ms=duration_ms)
+        record(
+            tool="prometheus",
+            inputs={"query": query},
+            outputs=error.model_dump(),
+            success=False,
+            duration_ms=duration_ms,
+        )
         return error
