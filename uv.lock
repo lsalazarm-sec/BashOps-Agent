@@ -259,6 +259,58 @@ wheels = [
 ]
 
 [[package]]
+name = "bashops-agent"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "httpx" },
+    { name = "kubernetes" },
+    { name = "prometheus-api-client" },
+    { name = "pydantic" },
+    { name = "pydantic-ai" },
+    { name = "pyyaml" },
+    { name = "rich" },
+    { name = "structlog" },
+    { name = "tenacity" },
+    { name = "textual" },
+    { name = "typer" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "mypy" },
+    { name = "pytest" },
+    { name = "pytest-asyncio" },
+    { name = "pytest-cov" },
+    { name = "pytest-mock" },
+    { name = "ruff" },
+    { name = "types-pyyaml" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "httpx", specifier = ">=0.27" },
+    { name = "kubernetes", specifier = ">=31.0" },
+    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.13" },
+    { name = "prometheus-api-client", specifier = ">=0.5.5" },
+    { name = "pydantic", specifier = ">=2.9" },
+    { name = "pydantic-ai", specifier = ">=0.0.14" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3" },
+    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = ">=0.24" },
+    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0" },
+    { name = "pytest-mock", marker = "extra == 'dev'", specifier = ">=3.14" },
+    { name = "pyyaml", specifier = ">=6.0" },
+    { name = "rich", specifier = ">=13.9" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.7" },
+    { name = "structlog", specifier = ">=24.4" },
+    { name = "tenacity", specifier = ">=9.0" },
+    { name = "textual", specifier = ">=0.83" },
+    { name = "typer", specifier = ">=0.12" },
+    { name = "types-pyyaml", marker = "extra == 'dev'" },
+]
+provides-extras = ["dev"]
+
+[[package]]
 name = "beartype"
 version = "0.22.9"
 source = { registry = "https://pypi.org/simple" }
@@ -1205,58 +1257,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/f3/49/3b30cad09e7771a49
 wheels = [
     { url = "https://files.pythonhosted.org/packages/fa/5e/f8e9a1d23b9c20a551a8a02ea3637b4642e22c2626e3a13a9a29cdea99eb/importlib_metadata-8.7.1-py3-none-any.whl", hash = "sha256:5a1f80bf1daa489495071efbb095d75a634cf28a8bc299581244063b53176151", size = 27865, upload-time = "2025-12-21T10:00:18.329Z" },
 ]
-
-[[package]]
-name = "infra-copilot"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "httpx" },
-    { name = "kubernetes" },
-    { name = "prometheus-api-client" },
-    { name = "pydantic" },
-    { name = "pydantic-ai" },
-    { name = "pyyaml" },
-    { name = "rich" },
-    { name = "structlog" },
-    { name = "tenacity" },
-    { name = "textual" },
-    { name = "typer" },
-]
-
-[package.optional-dependencies]
-dev = [
-    { name = "mypy" },
-    { name = "pytest" },
-    { name = "pytest-asyncio" },
-    { name = "pytest-cov" },
-    { name = "pytest-mock" },
-    { name = "ruff" },
-    { name = "types-pyyaml" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "httpx", specifier = ">=0.27" },
-    { name = "kubernetes", specifier = ">=31.0" },
-    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.13" },
-    { name = "prometheus-api-client", specifier = ">=0.5.5" },
-    { name = "pydantic", specifier = ">=2.9" },
-    { name = "pydantic-ai", specifier = ">=0.0.14" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3" },
-    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = ">=0.24" },
-    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0" },
-    { name = "pytest-mock", marker = "extra == 'dev'", specifier = ">=3.14" },
-    { name = "pyyaml", specifier = ">=6.0" },
-    { name = "rich", specifier = ">=13.9" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.7" },
-    { name = "structlog", specifier = ">=24.4" },
-    { name = "tenacity", specifier = ">=9.0" },
-    { name = "textual", specifier = ">=0.83" },
-    { name = "typer", specifier = ">=0.12" },
-    { name = "types-pyyaml", marker = "extra == 'dev'" },
-]
-provides-extras = ["dev"]
 
 [[package]]
 name = "iniconfig"
