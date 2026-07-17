@@ -4,6 +4,10 @@
 
 **Ask your infrastructure questions in plain text. Runs 100% locally on your GPU.**
 
+**A ReAct-based LLM agent for infrastructure troubleshooting.**
+
+**Runs kubectl, shell, and PromQL queries against real systems, reasons over the output, and responds in plain text, fully local via Ollama, no data leaves your network.**
+
 <img src="docs/icons/python.svg" width="28" height="28"> <img src="docs/icons/ollama.svg" width="28" height="28"> <img src="docs/icons/kubernetes.svg" width="28" height="28"> <img src="docs/icons/docker.svg" width="28" height="28"> <img src="docs/icons/prometheus.svg" width="28" height="28"> <img src="docs/icons/grafana.svg" width="28" height="28"> <img src="docs/icons/ubuntu.svg" width="28" height="28"> <img src="docs/icons/amd.svg" width="28" height="28"> <img src="docs/icons/github.svg" width="28" height="28">
 
 [![CI](https://github.com/lsalazarm-sec/bashops-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/lsalazarm-sec/bashops-agent/actions)
