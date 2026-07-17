@@ -66,7 +66,7 @@ Built and tested on an AMD Radeon RX 7700 XT with ROCm 7.x on Ubuntu 24.04.
 - 🔄 **ReAct reasoning loop** — the agent iterates: decide → execute tool → reason about output → decide again, until it has a complete answer.
 - 🐧 **Linux-first, AMD-ready** — built on Ubuntu 24.04 with ROCm 7.x. Works with NVIDIA and CPU too.
 - 📊 **Prometheus integration** — query metrics and monitor cluster health via PromQL
-
+- 📊 **Grafana dashboards** — production-grade Kubernetes and Prometheus dashboards included out of the box
 ---
 
 ## Quickstart
@@ -246,7 +246,7 @@ See [docs/rocm-setup.md](docs/rocm-setup.md) for the full setup guide from scrat
 - [ROCm setup guide](docs/rocm-setup.md)
 - [Adding a custom tool](docs/custom-tools.md)
 - [Configuration reference](docs/configuration.md)
-
+- [Grafana Dashboards](docs/grafana-dashboards.md)
 ---
 
 ## 🛠️ Development
