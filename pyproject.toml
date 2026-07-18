@@ -34,7 +34,7 @@ dev = [
 ]
 
 [project.scripts]
-copilot = "infra_copilot.cli:app"
+bashops = "infra_copilot.cli:app"
 
 [project.urls]
 Homepage = "https://github.com/lsalazarm-sec/bashops-agent"

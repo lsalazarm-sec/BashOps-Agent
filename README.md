@@ -97,12 +97,13 @@ cd bashops-agent
 uv sync
 
 # Initialize config
-copilot init
+bashops init
 ```
 
 ### One-shot query
 
 ```bash
+<<<<<<< HEAD
 # Kubernetes
 bashops ask "why is the api-gateway pod restarting?"
 bashops ask "which nodes have the most memory pressure?"
@@ -116,6 +117,13 @@ bashops ask "what's using the most CPU right now?"
 bashops ask "is everything up according to prometheus?"
 bashops ask "what's the available memory according to prometheus?"
 bashops ask "show me the CPU usage trend for the last hour"
+=======
+bashops ask "why is the api-gateway pod restarting?"
+bashops ask "which nodes have the most memory pressure?"
+bashops ask "how much disk space is left on this machine?"
+bashops ask "is everything up according to prometheus?"
+bashops ask "what's the available memory according to prometheus?"
+>>>>>>> a25a01f (refactor: rename CLI command from copilot to bashops, add Prometheus examples to README)
 ```
 
 ### Interactive TUI
@@ -127,10 +135,17 @@ bashops tui
 ### Available commands
 
 ```
+<<<<<<< HEAD
 bashops ask <question>     One-shot query
 bashops tui                Interactive TUI session
 bashops init               Create default config file
 bashops version            Print version
+=======
+bashops ask <question>   One-shot query
+bashops tui              Interactive TUI session
+bashops init             Create default config file
+bashops version          Print version
+>>>>>>> a25a01f (refactor: rename CLI command from copilot to bashops, add Prometheus examples to README)
 ```
 ---
 
@@ -166,7 +181,7 @@ Security is a first-class concern. The agent cannot do anything you haven't expl
 
 ##  Configuration
 
-Default config is created at `~/.config/bashops-agent/config.yaml` by running `copilot init`:
+Default config is created at `~/.config/bashops-agent/config.yaml` by running `bashops init`:
 
 ```yaml
 llm:

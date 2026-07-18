@@ -34,7 +34,7 @@ def _load_settings() -> Settings:
 @app.command()
 def version() -> None:
     """Print version and exit."""
-    console.print(f"infra-copilot {__version__}")
+    console.print(f"bashops-agent {__version__}")
 
 
 @app.command()
