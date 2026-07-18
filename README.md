@@ -103,24 +103,34 @@ copilot init
 ### One-shot query
 
 ```bash
-copilot ask "why is the api-gateway pod restarting?"
-copilot ask "which nodes have the most memory pressure?"
-copilot ask "how much disk space is left on this machine?"
+# Kubernetes
+bashops ask "why is the api-gateway pod restarting?"
+bashops ask "which nodes have the most memory pressure?"
+bashops ask "what pods are running in the default namespace?"
+
+# System
+bashops ask "how much disk space is left on this machine?"
+bashops ask "what's using the most CPU right now?"
+
+# Prometheus
+bashops ask "is everything up according to prometheus?"
+bashops ask "what's the available memory according to prometheus?"
+bashops ask "show me the CPU usage trend for the last hour"
 ```
 
 ### Interactive TUI
 
 ```bash
-copilot tui
+bashops tui
 ```
 
 ### Available commands
 
 ```
-copilot ask <question>   One-shot query
-copilot tui              Interactive TUI session
-copilot init             Create default config file
-copilot version          Print version
+bashops ask <question>     One-shot query
+bashops tui                Interactive TUI session
+bashops init               Create default config file
+bashops version            Print version
 ```
 ---
 
