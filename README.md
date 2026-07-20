@@ -128,17 +128,11 @@ bashops tui
 ### Available commands
 
 ```
-<<<<<<< HEAD
 bashops ask <question>     One-shot query
 bashops tui                Interactive TUI session
 bashops init               Create default config file
 bashops version            Print version
-=======
-bashops ask <question>   One-shot query
-bashops tui              Interactive TUI session
-bashops init             Create default config file
-bashops version          Print version
->>>>>>> a25a01f (refactor: rename CLI command from copilot to bashops, add Prometheus examples to README)
+
 ```
 ---
 
