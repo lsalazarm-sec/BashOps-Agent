@@ -103,7 +103,6 @@ bashops init
 ### One-shot query
 
 ```bash
-<<<<<<< HEAD
 # Kubernetes
 bashops ask "why is the api-gateway pod restarting?"
 bashops ask "which nodes have the most memory pressure?"
@@ -117,13 +116,7 @@ bashops ask "what's using the most CPU right now?"
 bashops ask "is everything up according to prometheus?"
 bashops ask "what's the available memory according to prometheus?"
 bashops ask "show me the CPU usage trend for the last hour"
-=======
-bashops ask "why is the api-gateway pod restarting?"
-bashops ask "which nodes have the most memory pressure?"
-bashops ask "how much disk space is left on this machine?"
-bashops ask "is everything up according to prometheus?"
-bashops ask "what's the available memory according to prometheus?"
->>>>>>> a25a01f (refactor: rename CLI command from copilot to bashops, add Prometheus examples to README)
+
 ```
 
 ### Interactive TUI
