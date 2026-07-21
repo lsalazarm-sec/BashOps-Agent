@@ -11,6 +11,7 @@ import httpx
 from infra_copilot.config import Settings
 from infra_copilot.tools.kubectl import kubectl_run
 from infra_copilot.tools.prometheus import prometheus_query
+from infra_copilot.tools.wazuh import wazuh_query
 from infra_copilot.tools.shell import shell_run
 
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -37,6 +38,12 @@ TOOL: prometheus
     - "node_memory_MemAvailable_bytes" -> available memory in bytes
     - "rate(container_cpu_usage_seconds_total[5m])" -> CPU usage rate
 
+TOOL: wazuh
+  query_type: string ("agents" or "alerts")
+  Use this tool for questions about security events, alerts, threats, or
+  Wazuh agent connectivity status. "agents" lists connected Wazuh agents.
+  "alerts" lists the 10 most recent security alerts.
+
 STRICT OUTPUT RULES:
 - If you need a tool, output ONLY the JSON on its own line. No intro, no explanation.
 - If you have enough information, respond conversationally in markdown. Adapt your answer to the question:
@@ -51,6 +58,7 @@ Tool call examples (output exactly like this, nothing else):
 {"tool": "kubectl", "verb": "get", "args": ["pods", "-n", "default"]}
 {"tool": "shell", "binary": "df", "args": ["-h"]}
 {"tool": "prometheus", "query": "up"}
+{"tool": "wazuh", "query_type": "alerts"}
 """
 
 
@@ -143,6 +151,14 @@ async def ask(prompt: str, settings: Settings) -> str:
         elif tool_name == "prometheus":
             result = await prometheus_query(
                 query=tool_call.get("query", ""),
+                settings=settings,
+            )
+            tool_output = result.model_dump_json(indent=2)
+
+
+        elif tool_name == "wazuh":
+            result = await wazuh_query(
+                query_type=tool_call.get("query_type", "agents"),
                 settings=settings,
             )
             tool_output = result.model_dump_json(indent=2)

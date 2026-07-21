@@ -49,6 +49,12 @@ class Settings(BaseModel):
     safety: SafetyConfig = Field(default_factory=SafetyConfig)
     kubeconfig: str | None = None
     prometheus_url: str = "http://localhost:9090"
+    wazuh_manager_url: str = "https://localhost:55000"
+    wazuh_user: str = "wazuh-wui"
+    wazuh_password: str = "MyS3cr37P450r.*-"
+    wazuh_indexer_url: str = "https://localhost:9200"
+    wazuh_indexer_user: str = "admin"
+    wazuh_indexer_password: str = "SecretPassword"
 
     @classmethod
     def load(cls, path: Path | None = None) -> Settings:

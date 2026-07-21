@@ -1,0 +1,60 @@
+---
+- name: Deploy Wazuh SIEM stack via Docker
+  hosts: local
+  become: false
+
+  vars:
+    wazuh_version: "v4.14.6"
+    wazuh_repo_dir: "{{ ansible_env.HOME }}/projects/wazuh-docker"
+
+  tasks:
+    - name: Check if Wazuh repo already exists
+      stat:
+        path: "{{ wazuh_repo_dir }}"
+      register: wazuh_repo_check
+
+    - name: Clone Wazuh Docker repository
+      git:
+        repo: "https://github.com/wazuh/wazuh-docker.git"
+        dest: "{{ wazuh_repo_dir }}"
+        version: "{{ wazuh_version }}"
+        single_branch: true
+      when: not wazuh_repo_check.stat.exists
+
+    - name: Check if indexer certificates already exist
+      stat:
+        path: "{{ wazuh_repo_dir }}/single-node/config/wazuh_indexer_ssl_certs"
+      register: certs_check
+
+    - name: Generate indexer SSL certificates
+      command: docker compose -f generate-indexer-certs.yml run --rm generator
+      args:
+        chdir: "{{ wazuh_repo_dir }}/single-node"
+      when: not certs_check.stat.exists
+
+    - name: Start Wazuh stack
+      command: docker compose up -d
+      args:
+        chdir: "{{ wazuh_repo_dir }}/single-node"
+      register: wazuh_up
+
+    - name: Wait for Wazuh manager API to respond
+      uri:
+        url: "https://localhost:55000"
+        method: GET
+        validate_certs: false
+        status_code: [401, 200]
+      register: wazuh_health
+      until: wazuh_health.status in [401, 200]
+      retries: 20
+      delay: 15
+
+    - name: Show final container status
+      command: docker compose ps
+      args:
+        chdir: "{{ wazuh_repo_dir }}/single-node"
+      register: final_status
+
+    - name: Print status
+      debug:
+        var: final_status.stdout_lines
