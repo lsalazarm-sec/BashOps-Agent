@@ -177,6 +177,3 @@ async def ask(prompt: str, settings: Settings) -> str:
             )
 
     return last_response
-
-
-
