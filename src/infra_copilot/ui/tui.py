@@ -13,7 +13,7 @@ from infra_copilot.agents.main import ask
 from infra_copilot.config import Settings
 
 
-class CopilotApp(App[None]):
+class BashopsApp(App[None]):
     """Interactive chat UI for infra-copilot."""
 
     CSS = """
@@ -84,4 +84,4 @@ class CopilotApp(App[None]):
 
 
 def run_tui(settings: Settings) -> None:
-    CopilotApp(settings).run()
+    BashopsApp(settings).run()
