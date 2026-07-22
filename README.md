@@ -49,6 +49,20 @@
 > Note: in local `kind` clusters, control-plane components (etcd, kube-scheduler, kube-proxy)
 > often show as "down" in Prometheus because they don't expose metrics endpoints by default —
 > this is a kind limitation, not an actual cluster issue.
+
+![Prometheus Hourly Report](docs/demo/prometheus-demo-01.gif)
+
+> Recent 60-minute trends to identify sudden spikes or drops.
+> Automated log summary for the immediate trailing hour.
+
+
+### Wazuh Security Alerts [+] Reconnaissance & Authentication Spikes [+]
+
+![Wazuh demo](docs/demo/wazuh-demo.gif)
+
+> The agent queries the Wazuh API to catch real-time infrastructure threats, mapping behavior, and network exposure loops.
+> Recent 60-minute trends highlight active Kali Linux port scans (`netstat`) and unauthorized brute-force attempts targeting the pod.
+
 ---
 
 ## Why this exists
@@ -74,6 +88,7 @@ Built and tested on an AMD Radeon RX 7700 XT with ROCm 7.x on Ubuntu 24.04.
 -  **Linux-first, AMD-ready** — built on Ubuntu 24.04 with ROCm 7.x. Works with NVIDIA and CPU too.
 -  **Prometheus integration** — query metrics and monitor cluster health via PromQL
 -  **Grafana dashboards** — production-grade Kubernetes and Prometheus dashboards included out of the box
+-  **Wazuh integration** — query connected security agents and recent alerts via natural language
 ---
 
 ## Quickstart
@@ -104,25 +119,25 @@ bashops init
 
 ```bash
 # Kubernetes
-bashops ask "why is the api-gateway pod restarting?"
-bashops ask "which nodes have the most memory pressure?"
-bashops ask "what pods are running in the default namespace?"
+uv run bashops ask "why is the api-gateway pod restarting?"
+uv run bashops ask "which nodes have the most memory pressure?"
+uv run bashops ask "what pods are running in the default namespace?"
 
 # System
-bashops ask "how much disk space is left on this machine?"
-bashops ask "what's using the most CPU right now?"
+uv run bashops ask "how much disk space is left on this machine?"
+uv run bashops ask "what's using the most CPU right now?"
 
 # Prometheus
-bashops ask "is everything up according to prometheus?"
-bashops ask "what's the available memory according to prometheus?"
-bashops ask "show me the CPU usage trend for the last hour"
+uv run bashops ask "is everything up according to prometheus?"
+uv run bashops ask "what's the available memory according to prometheus?"
+uv run bashops ask "show me the CPU usage trend for the last hour"
 
 ```
 
 ### Interactive TUI
 
 ```bash
-bashops tui
+uv run bashops tui
 ```
 
 ### Available commands
@@ -231,7 +246,7 @@ See [docs/rocm-setup.md](docs/rocm-setup.md) for the full setup guide from scrat
 - [ ] Multi-cluster context switching
 
 ### v0.3 — Security integrations
-- [ ] Wazuh API tool — query alerts, agents, and security events
+- [x] Wazuh API tool — query alerts, agents, and security events (deployment automated via Ansible)
 - [ ] SSH executor (opt-in per host)
 - [ ] Alert correlation across kubectl + Wazuh
 
