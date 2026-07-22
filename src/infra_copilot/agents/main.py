@@ -139,7 +139,6 @@ async def ask(prompt: str, settings: Settings) -> str:
                 settings=settings,
             )
             tool_output = result.model_dump_json(indent=2)
-
         elif tool_name == "shell":
             result = await shell_run(
                 binary=tool_call.get("binary", ""),
@@ -147,22 +146,18 @@ async def ask(prompt: str, settings: Settings) -> str:
                 settings=settings,
             )
             tool_output = result.model_dump_json(indent=2)
-
         elif tool_name == "prometheus":
             result = await prometheus_query(
                 query=tool_call.get("query", ""),
                 settings=settings,
             )
             tool_output = result.model_dump_json(indent=2)
-
-
         elif tool_name == "wazuh":
             result = await wazuh_query(
                 query_type=tool_call.get("query_type", "agents"),
                 settings=settings,
             )
             tool_output = result.model_dump_json(indent=2)
-
         else:
             tool_output = json.dumps({"error": f"Unknown tool: {tool_name}"})
 
