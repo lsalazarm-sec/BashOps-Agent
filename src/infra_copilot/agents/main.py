@@ -9,10 +9,10 @@ import re
 import httpx
 
 from infra_copilot.config import Settings
-from infra_copilot.tools.kubectl import kubectl_run
 from infra_copilot.tools.prometheus import prometheus_query
 from infra_copilot.tools.wazuh import wazuh_query
 from infra_copilot.tools.shell import shell_run
+from infra_copilot.tools.wazuh import wazuh_query
 
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
