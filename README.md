@@ -68,15 +68,15 @@
 
 ### 1. Kali Linux Reconnaissance & Hydra Attack
 Execution of port scanning and SSH brute-force attack vectors targeting the environment using Nmap and Hydra from Kali Linux.
-![Kali Linux Attack Execution](../demo/wazuh-attack-demo.gif)
+![Kali Linux Attack Execution](docs/demo/wazuh-attack-demo.gif)
 
 ### 2. Wazuh SIEM Overview & Incident Analysis
 A guided tour of the Wazuh Dashboard showing active agents, security events, severity classification, and real-time alert generation resulting from the simulated attack.
-![Wazuh SIEM Security Overview](../demo/wazuh-kali-attack.gif)
+![Wazuh SIEM Security Overview](docs/demo/wazuh-kali-attack.gif)
 
 ### 3. Local LLM Security Query (`bashops ask`)
 Interacting with the local LLM agent to analyze the SIEM state and extract structured security tables by querying: `"what are the most critical recent security alerts in wazuh?"`.
-![BashOps Security Alert Query](../demo/bashopsquery-kali-attack.gif)
+![BashOps Security Alert Query](docs/demo/bashopsquery-kali-attack.gif)
 
 ---
 
