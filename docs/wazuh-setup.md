@@ -4,15 +4,15 @@ The `bashops-agent` integrates with Wazuh to provide real-time security agent st
 
 This guide documents how the Wazuh infrastructure is deployed and how the LLM agent interacts with its APIs.
 
+<!--Login -->
+![Wazuh Login Screen](wazuh/wazuh-login-screen.png)
+
 <!-- Overview -->
 ![Wazuh Dashboard Overview](wazuh/wazuh-overview-page.png)
 
 ## Architecture
 
 Wazuh runs independently of `bashops-agent` as a separate Docker Compose stack. The agent acts exclusively as a consumer of the Wazuh APIs, not the owner of the deployment.
-
-<!--Login -->
-![Wazuh Login Screen](wazuh/wazuh-login-screen.png)
 
 Wazuh splits data access across two distinct services requiring different authentication methods:
 
@@ -31,7 +31,8 @@ ansible-playbook deploy-wazuh.yml -i inventory.ini
 ```
 
 <!-- Ansible Playbook -->
-![Ansible Playbook Execution](wazuh/ansible-playbook-deploy.jpg)
+
+![Ansible Playbook Execution](wazuh/ansible-playbook-deploy.png)
 
 The playbook is idempotent: it clones the repository, generates necessary SSL certificates, and spins up the Docker Compose stack only if it isn't already running. It includes a health-check step that polls the Manager API until it responds before reporting success.
 
@@ -60,7 +61,8 @@ sudo systemctl start wazuh-agent
 ```
 
 <!-- Agent Deploy -->
-![Wazuh Agent Deployment](wazuh/wazuh-agent-deploy.jpg)
+
+![Wazuh Agent Deployment](wazuh/wazuh-agent-deploy.png)
 
 To verify connected agents directly from the manager container:
 ```bash
