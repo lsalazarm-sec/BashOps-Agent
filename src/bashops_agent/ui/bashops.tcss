@@ -1,0 +1,25 @@
+/* src/bashops_agent/ui/bashops.tcss */
+
+Screen {
+    background: #0f0f14;
+    layout: vertical;
+}
+
+#chat-container {
+    height: 1fr;
+    border: none;
+    padding: 1 2;
+    background: #1a1b26;
+    overflow-y: scroll;
+}
+
+Input {
+    dock: bottom;
+    border: tall #3b4261;
+    background: #16161e;
+    margin: 1 2;
+}
+
+Input:focus {
+    border: tall #7aa2f7;
+}
