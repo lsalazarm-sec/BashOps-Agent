@@ -24,13 +24,13 @@
 
 ## Demo
 
-### CLI [+] One-Shot Queries [+]
+### CLI                                   [+] One-Shot Queries [+]
 ![CLI demo](docs/demo/demo.gif)
 
 > Ask a question, get an answer. The agent runs `kubectl` and shell commands under the hood,
 > reasons about the real output, and responds in plain English.
 
-### TUI [+] Interactive Session [+]
+### TUI                                   [+] Interactive Session [+]
 ![TUI demo](docs/demo/tui-demo.gif)
 
 > The interactive mode lets you have a back-and-forth conversation with your infrastructure.
@@ -39,9 +39,11 @@
 > The agent runs `kubectl` and `df` under the hood, reasons about the output, and responds in plain text.
 > No copy-pasting commands, no tab switching.
 
-### Prometheus [+] Metrics and monitoring queries [+]
+### Prometheus                             [+] Metrics and monitoring queries [+]
 
 <img width="1055" height="207" alt="image" src="https://github.com/user-attachments/assets/dfb6d3dc-8320-4c14-8573-192bc72e62ae" />
+
+
 
 ![Prometheus demo](docs/demo/prometheus-demo.gif)
 
@@ -56,7 +58,7 @@
 > Automated log summary for the immediate trailing hour.
 
 
-### Wazuh Security Alerts [+] Reconnaissance & Authentication Spikes [+]
+### Wazuh Security Alerts                 [+] Reconnaissance & Authentication Spikes [+]
 
 ![Wazuh demo](docs/demo/wazuh-demo.gif)
 
