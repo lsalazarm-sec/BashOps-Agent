@@ -1,4 +1,4 @@
-"""Configuration loaded from ~/.config/infra-copilot/config.yaml."""
+"""Configuration loaded from ~/.config/bashops-agent/config.yaml."""
 
 from __future__ import annotations
 
@@ -8,9 +8,9 @@ from typing import Literal
 import yaml
 from pydantic import BaseModel, Field
 
-CONFIG_DIR = Path.home() / ".config" / "infra-copilot"
+CONFIG_DIR = Path.home() / ".config" / "bashops-agent"
 CONFIG_FILE = CONFIG_DIR / "config.yaml"
-DATA_DIR = Path.home() / ".local" / "share" / "infra-copilot"
+DATA_DIR = Path.home() / ".local" / "share" / "bashops-agent"
 AUDIT_LOG = DATA_DIR / "audit.jsonl"
 
 
