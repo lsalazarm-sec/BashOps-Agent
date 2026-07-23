@@ -14,7 +14,7 @@ from bashops_agent.config import Settings
 
 
 class BashopsApp(App[None]):
-    """Interactive chat UI for infra-copilot."""
+    """Interactive chat UI for bashops-agent."""
 
     CSS = """
     #conversation {
@@ -42,7 +42,7 @@ class BashopsApp(App[None]):
         yield Header(show_clock=True)
         with Vertical():
             yield Markdown(
-                "# infra-copilot\n\nAsk anything about your infrastructure.", id="conversation"
+                "# bashops-agent\n\nAsk anything about your infrastructure.", id="conversation"
             )
             yield Static("Ready.", id="status")
         yield Input(placeholder="Type your question...")
@@ -79,7 +79,7 @@ class BashopsApp(App[None]):
     def action_clear(self) -> None:
         self.history.clear()
         self.run_worker(
-            self.query_one("#conversation", Markdown).update("# infra-copilot\n\nReady.")
+            self.query_one("#conversation", Markdown).update("# bashops-agent\n\nReady.")
         )
 
 
