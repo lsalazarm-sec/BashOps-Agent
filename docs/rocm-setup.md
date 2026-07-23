@@ -2,7 +2,7 @@
 
 This guide documents the exact steps to get ROCm 7.x, PyTorch, and Ollama running
 on an AMD Radeon RX 7700 XT (gfx1101) on Ubuntu 24.04.4 LTS. This is the environment
-used to develop and run infra-copilot.
+used to develop and run bashops-agent.
 
 ## Hardware
 

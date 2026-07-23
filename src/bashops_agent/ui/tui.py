@@ -9,8 +9,8 @@ from textual.app import App, ComposeResult
 from textual.containers import Vertical
 from textual.widgets import Footer, Header, Input, Markdown, Static
 
-from infra_copilot.agents.main import ask
-from infra_copilot.config import Settings
+from bashops_agent.agents.main import ask
+from bashops_agent.config import Settings
 
 
 class BashopsApp(App[None]):

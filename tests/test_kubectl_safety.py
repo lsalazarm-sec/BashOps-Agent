@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from infra_copilot.config import Settings
-from infra_copilot.tools.kubectl import KubectlBlocked, kubectl_run
+from bashops_agent.config import Settings
+from bashops_agent.tools.kubectl import KubectlBlocked, kubectl_run
 
 
 @pytest.fixture

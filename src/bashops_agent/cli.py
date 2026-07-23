@@ -10,9 +10,9 @@ import typer
 from rich.console import Console
 from rich.markdown import Markdown
 
-from infra_copilot import __version__
-from infra_copilot.agents.main import ask
-from infra_copilot.config import CONFIG_FILE, Settings
+from bashops_agent import __version__
+from bashops_agent.agents.main import ask
+from bashops_agent.config import CONFIG_FILE, Settings
 
 app = typer.Typer(
     name="copilot",
@@ -59,7 +59,7 @@ app.command(name="ask")(ask_cmd)
 @app.command()
 def tui() -> None:
     """Launch the interactive TUI."""
-    from infra_copilot.ui.tui import run_tui
+    from bashops_agent.ui.tui import run_tui
 
     settings = _load_settings()
     run_tui(settings)

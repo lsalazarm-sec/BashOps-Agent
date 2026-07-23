@@ -9,8 +9,8 @@ from typing import Annotated
 
 from pydantic import BaseModel, Field
 
-from infra_copilot.audit import record
-from infra_copilot.config import Settings
+from bashops_agent.audit import record
+from bashops_agent.config import Settings
 
 MAX_OUTPUT_CHARS = 8000
 

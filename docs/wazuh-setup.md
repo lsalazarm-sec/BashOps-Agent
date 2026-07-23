@@ -76,7 +76,7 @@ docker exec -it single-node-wazuh.manager-1 /var/ossec/bin/agent_control -l
 
 ## Tool Implementation: `wazuh.py`
 
-The script `src/infra_copilot/tools/wazuh.py` exposes two read-only capabilities to the LLM:
+The script `src/bashops_agent/tools/wazuh.py` exposes two read-only capabilities to the LLM:
 
 *   **`agents`**: Authenticates against the Manager API to list connected endpoints, returning their status (active/disconnected), OS details, and agent version.
 *   **`alerts`**: Queries the Indexer API targeting the `wazuh-alerts-*` index via OpenSearch `_search`. It sorts by timestamp and returns the 10 most recent security events, including rule descriptions, severity levels, and MITRE ATT&CK mapping.
@@ -101,7 +101,7 @@ To configure the LLM agent, you need to extract the credentials generated during
 <!-- API Credentials -->
 ![Wazuh API Credentials](wazuh/API-credentials.png)
 
-Wazuh connection settings are defined in the `Settings` class (`src/infra_copilot/config.py`):
+Wazuh connection settings are defined in the `Settings` class (`src/bashops_agent/config.py`):
 
 ```yaml
 wazuh_manager_url: "https://localhost:55000"
