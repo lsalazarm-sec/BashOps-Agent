@@ -72,7 +72,7 @@ class BashopsApp(App[None]):
         except Exception as e:
             answer = f"Error: {e}"
 
-        self.history.append(f"**copilot:** {answer}\n")
+        self.history.append(f"**bashops:** {answer}\n")
         await conv.update("\n".join(self.history))
         status.update("Ready.")
 
