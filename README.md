@@ -138,14 +138,22 @@ uv sync
 bashops init
 ```
 
-### Available commands
+### One-shot query (Examples)
 
 ```bash
-bashops ask <question>     # One-shot query for automation or quick checks
-bashops tui                # Interactive TUI session
-bashops init               # Create default config file
-bashops version            # Print version
+# System & Docker
+uv run bashops ask "What is eating my RAM right now?"
+uv run bashops ask "Is the docker service healthy?"
+
+# Kubernetes
+uv run bashops ask "Are there any pods continuously restarting in the default namespace?"
+
+# Observability & Security
+uv run bashops ask "Are all prometheus targets currently up?"
+uv run bashops ask "What are the most critical recent security alerts in wazuh?"
 ```
+
+📚 Looking for more? Check out the full BashOps Prompt Cheatsheet for advanced use cases across Kubernetes, Prometheus, Wazuh, and system administration.
 
 ---
 
