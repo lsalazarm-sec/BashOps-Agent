@@ -38,7 +38,7 @@ class BashopsApp(App):
     def on_mount(self) -> None:
         """Executes once the UI is successfully rendered on screen."""
         chat_log = self.query_one("#chat-log", RichLog)
-        chat_log.write("[bold cyan]System:[/bold cyan] BashOps agent initialized. Standing by for queries.")
+        chat_log.write("[bold cyan]System:[/bold cyan] BashOps Agent Online --> What are we investigating today Luis?")
 
     @work(exclusive=True, thread=True)
     def process_query(self, query: str) -> None:

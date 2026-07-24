@@ -70,13 +70,45 @@ async def prometheus_query(
             return error
 
         result_type = data["data"]["resultType"]
-        results = data["data"]["result"]
+        raw_results = data["data"]["result"]
 
-        result = PrometheusResult(query=query, result_type=result_type, results=results)
+        clean_results = []
+
+        # PRE-PROCESSING: Destroy the Prometheus JSON structure completely.
+        # We extract only the target name and the numbers to force the LLM to read data, not schemas.
+        for item in raw_results:
+            labels = item.get("metric", {})
+            # Try to grab the pod name, fallback to instance IP, fallback to raw string
+            target = labels.get("pod", labels.get("instance", str(labels)))
+
+            if result_type == "matrix" and "values" in item:
+                try:
+                    numeric_values = [float(v[1]) for v in item["values"]]
+                    clean_results.append({
+                        "target": target,
+                        "trend_min_cores": round(min(numeric_values), 4),
+                        "trend_max_cores": round(max(numeric_values), 4),
+                        "trend_avg_cores": round(sum(numeric_values) / len(numeric_values), 4),
+                    })
+                except (ValueError, TypeError):
+                    pass
+            elif result_type == "vector" and "value" in item:
+                try:
+                    val = float(item["value"][1])
+                    clean_results.append({
+                        "target": target,
+                        "current_value_cores": round(val, 4)
+                    })
+                except (ValueError, TypeError, IndexError):
+                    pass
+
+        # Pass the sterilized, strictly numeric list to the Pydantic model
+        result = PrometheusResult(query=query, result_type=result_type, results=clean_results)
+        
         record(
             tool="prometheus",
             inputs={"query": query},
-            outputs={"result_count": len(results)},
+            outputs={"result_count": len(clean_results)},
             success=True,
             duration_ms=duration_ms,
         )
@@ -93,3 +125,4 @@ async def prometheus_query(
             duration_ms=duration_ms,
         )
         return error
+
