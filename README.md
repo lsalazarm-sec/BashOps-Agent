@@ -16,57 +16,58 @@
 [![Ollama](https://img.shields.io/badge/Ollama-powered-purple.svg)](https://ollama.com)
 [![AMD ROCm](https://img.shields.io/badge/AMD-ROCm%207.x-red.svg)](https://rocm.docs.amd.com)
 
-[Demo](#-demo) · [Why this exists](#-why-this-exists) · [Features](#-features) · [Quickstart](#-quickstart) · [Architecture](#-architecture) · [Safety](#-safety-model) · [Docs](#-documentation)
+[Demo](#-demo--capabilities) · [Security Demos](#-security--threat-detection-demos) · [Why this exists](#-why-this-exists) · [Features](#-features) · [Quickstart](#-quickstart) · [Architecture](#-architecture) · [Safety](#-safety-model) · [Docs](#-documentation)
 
 </div>
 
 ---
 
-## Demo
+## 🎬 Demo & Capabilities
 
-### CLI                                   [+] One-Shot Queries [+]
-![CLI demo](docs/demo/demo.gif)
+###  Command-Line Operations (CLI) & Safety Executions
 
-> Ask a question, get an answer. The agent runs `kubectl` and shell commands under the hood,
-> reasons about the real output, and responds in plain English.
+The CLI mode is designed for quick, single-shot queries and immediate incident response.
 
-### TUI                                   [+] Interactive Session [+]
-![TUI demo](docs/demo/tui-demo.gif)
+#### 1. Passive Diagnostics (Read-Only)
+For standard diagnostics, the agent operates with standard privileges, safely querying system states without the risk of accidental modifications.
 
-> The interactive mode lets you have a back-and-forth conversation with your infrastructure.
-> Each question builds on the context of the session. Press `Ctrl+C` to exit.
+![CLI Read Only](docs/demo/cli-readonly.gif)
+> **Action:** Querying system uptime and disk space utilization using `df` and `uptime`.
 
-> The agent runs `kubectl` and `df` under the hood, reasons about the output, and responds in plain text.
-> No copy-pasting commands, no tab switching.
+#### 2. Authorized Remediations (Mutative Actions)
+When a prompt requires changing the system state, the agent enforces a strict **Human-In-The-Loop (HITL)** barrier. 
+*Note: To execute mutative shell commands, the CLI must be invoked with root privileges preserving the environment (`sudo -E`), as standard OS security prevents unprivileged users from altering firewall or service configurations.*
 
-### Prometheus                             [+] Metrics and monitoring queries [+]
+![CLI Mutative Execution](docs/demo/cli-mutative-sudo.gif)
+> **Action:** The agent proposes a `ufw` block rule against a malicious IP, provides a mandatory engineering rationale, waits for `Y/N` authorization from the administrator, and executes the remediation.
 
-<img width="1055" height="207" alt="image" src="https://github.com/user-attachments/assets/dfb6d3dc-8320-4c14-8573-192bc72e62ae" />
+---
 
+### 💻 Interactive Terminal Interface (TUI)
 
+The TUI provides a persistent conversational context for complex debugging sessions, allowing you to have a back-and-forth conversation with your infrastructure.
 
-![Prometheus demo](docs/demo/prometheus-demo.gif)
+#### 1. System & Container Operations
+The agent can chain multiple commands, analyzing process trees and container states in a single cohesive response.
 
-> The agent queries Prometheus directly via PromQL to check target health and resource metrics.
-> Note: in local `kind` clusters, control-plane components (etcd, kube-scheduler, kube-proxy)
-> often show as "down" in Prometheus because they don't expose metrics endpoints by default —
-> this is a kind limitation, not an actual cluster issue.
+![TUI System Docker](docs/demo/tui-system-docker.gif)
+> **Action:** Identifying top memory consumers using `ps` and verifying the Docker daemon health status.
 
-![Prometheus Hourly Report](docs/demo/prometheus-demo-01.gif)
+#### 2. Kubernetes (K8s) Orchestration
+Seamlessly interacts with your clusters, fetching pod states, logs, and events to diagnose deployment issues.
 
-> Recent 60-minute trends to identify sudden spikes or drops.
-> Automated log summary for the immediate trailing hour.
+![TUI Kubernetes](docs/demo/tui-kubernetes.gif)
+> **Action:** Auditing a specific namespace for crash loops, checking pod status, and reading logs to find the root cause of a failure.
 
+#### 3. Observability (Prometheus & Grafana)
+Instead of overwhelming the LLM with raw UNIX timestamps, BashOps Agent intercepts PromQL matrix responses, calculates statistical summaries, and feeds a clean payload to the LLM.
 
-### Wazuh Security Alerts                 [+] Reconnaissance & Authentication Spikes [+]
+![TUI Prometheus](docs/demo/tui-prometheus-grafana.gif)
+> **Action:** Analyzing CPU usage trends over a 30-minute window and checking target health status.
 
-![Wazuh demo](docs/demo/wazuh-demo.gif)
+---
 
-> The agent queries the Wazuh API to catch real-time infrastructure threats, mapping behavior, and network exposure loops.
-> Recent 60-minute trends highlight active Kali Linux port scans (`netstat`) and unauthorized brute-force attempts targeting the pod.
-
-
-## Security & Threat Detection Demos
+## 🚨 Security & Threat Detection Demos
 
 ### 1. Kali Linux Reconnaissance & Hydra Attack
 Execution of port scanning and SSH brute-force attack vectors targeting the environment using Nmap and Hydra from Kali Linux.
@@ -85,7 +86,7 @@ Interacting with the local LLM agent to analyze the SIEM state and extract struc
 
 ---
 
-## Why this exists
+##  Why this exists
 
 Debugging infrastructure means context-switching between 8 terminal tabs before you even start reasoning about what went wrong — `kubectl`, `journalctl`, `top`, `ss`, logs, events, all at once.
 
@@ -97,26 +98,28 @@ Built and tested on an AMD Radeon RX 7700 XT with ROCm 7.x on Ubuntu 24.04.
 
 ---
 
-## Features
+##  Features
 
--  **Local LLM inference** — Qwen 2.5 Coder 14B running on your GPU via Ollama. Swap models with one config change.
--  **Real tool execution** — the agent actually runs `kubectl`, `journalctl`, `df`, `ps`, `ss`, and more. Not a wrapper around `kubectl explain`.
--  **Safety-first design** — read-only by default. Strict command allowlist. No shell string interpolation. Every action is audited.
--  **JSONL audit log** — every command, its arguments, output size, and latency logged to `~/.local/share/bashops-agent/audit.jsonl`.
--  **TUI + CLI** — interactive Textual UI for conversations, one-shot CLI for scripting.
--  **ReAct reasoning loop** — the agent iterates: decide → execute tool → reason about output → decide again, until it has a complete answer.
--  **Linux-first, AMD-ready** — built on Ubuntu 24.04 with ROCm 7.x. Works with NVIDIA and CPU too.
--  **Prometheus integration** — query metrics and monitor cluster health via PromQL
--  **Grafana dashboards** — production-grade Kubernetes and Prometheus dashboards included out of the box
--  **Wazuh integration** — query connected security agents and recent alerts via natural language
+- **Local LLM inference** — Qwen 2.5 Coder 14B running on your GPU via Ollama. Swap models with one config change.
+- **Real tool execution** — the agent actually runs `kubectl`, `journalctl`, `df`, `ps`, `ss`, and more. Not a wrapper around `kubectl explain`.
+- **Safety-first design** — Strict command allowlist. No shell string interpolation. Every action is audited.
+- **JSONL audit log** — every command, its arguments, output size, and latency logged to `~/.local/share/bashops-agent/audit.jsonl`.
+- **TUI + CLI** — interactive Textual UI for conversations, one-shot CLI for scripting.
+- **ReAct reasoning loop** — the agent iterates: decide → execute tool → reason about output → decide again, until it has a complete answer.
+- **Linux-first, AMD-ready** — built on Ubuntu 24.04 with ROCm 7.x. Works with NVIDIA and CPU too.
+- **Prometheus integration** — query metrics and monitor cluster health via PromQL
+- **Grafana dashboards** — production-grade Kubernetes and Prometheus dashboards included out of the box
+- **Wazuh integration** — query connected security agents and recent alerts via natural language
+
 ---
 
-## Quickstart
+##  Quickstart
 
 ### Prerequisites
 
 - Linux (Ubuntu 24.04 recommended)
 - Python 3.12+
+- [uv](https://github.com/astral-sh/uv) installed
 - [Ollama](https://ollama.com) installed and running
 - `kubectl` configured with at least one cluster (local or remote)
 
@@ -127,7 +130,7 @@ Built and tested on an AMD Radeon RX 7700 XT with ROCm 7.x on Ubuntu 24.04.
 ollama pull qwen2.5-coder:14b
 
 # Clone and install
-git clone https://github.com/lsalazarm-sec/bashops-agent.git
+git clone [https://github.com/lsalazarm-sec/bashops-agent.git](https://github.com/lsalazarm-sec/bashops-agent.git)
 cd bashops-agent
 uv sync
 
@@ -135,46 +138,20 @@ uv sync
 bashops init
 ```
 
-### One-shot query
-
-```bash
-# Kubernetes
-uv run bashops ask "why is the api-gateway pod restarting?"
-uv run bashops ask "which nodes have the most memory pressure?"
-uv run bashops ask "what pods are running in the default namespace?"
-
-# System
-uv run bashops ask "how much disk space is left on this machine?"
-uv run bashops ask "what's using the most CPU right now?"
-
-# Prometheus
-uv run bashops ask "is everything up according to prometheus?"
-uv run bashops ask "what's the available memory according to prometheus?"
-uv run bashops ask "show me the CPU usage trend for the last hour"
-
-```
-
-### Interactive TUI
-
-```bash
-uv run bashops tui
-```
-
 ### Available commands
 
+```bash
+bashops ask <question>     # One-shot query for automation or quick checks
+bashops tui                # Interactive TUI session
+bashops init               # Create default config file
+bashops version            # Print version
 ```
-bashops ask <question>     One-shot query
-bashops tui                Interactive TUI session
-bashops init               Create default config file
-bashops version            Print version
 
-```
 ---
 
-##  Architecture
+## 🏗️ Architecture
 
 <img width="1744" height="1770" alt="Diagram" src="https://github.com/user-attachments/assets/452b9cc2-97df-4d9b-8bc1-c1d4692d0a57" />
-
 
 The agent uses a **ReAct (Reason + Act) loop**, it reasons about what information it needs, calls a tool, gets real output, and reasons again. 
 This means answers are always grounded in actual system state, not hallucinated.
@@ -183,25 +160,26 @@ See [docs/architecture.md](docs/architecture.md) for full design decisions and t
 
 ---
 
-##  Safety model
+## 🛡️ Safety model
 
 Security is a first-class concern. The agent cannot do anything you haven't explicitly permitted.
 
-| Guardrail | Default | Override |
+| Guardrail | Enforcement | Description |
 |---|---|---|
-| Read-only mode | ✅ ON | `--write` flag (not yet implemented) |
-| kubectl allowed verbs | `get`, `describe`, `logs`, `top`, `explain`, `version` | `~/.config/bashops-agent/config.yaml` |
-| Shell allowed binaries | `journalctl`, `systemctl`, `ps`, `ss`, `df`, `free`, `uptime`, `ip` | `config.yaml` |
-| No shell string interpolation | Always | Not overridable |
-| Audit log | Always on | `config.yaml` |
+| **Read-Only Mode** | Configurable | Toggle to completely disable mutative operations. |
+| **Human-In-The-Loop** | Configurable | Administrator must input `Y/N` before any mutative execution. |
+| **Rationale Required** | Configurable | Forces the LLM to provide a strict engineering explanation before altering the system. |
+| **Allowed Binaries** | Explicit List | Restricts shell execution strictly to predefined commands (e.g., `journalctl`, `df`). |
+| **Mutative Binaries** | Explicit List | Specifies which binaries can alter state (e.g., `ufw`, `systemctl`). |
+| **Audit Log** | Always On | Complete logging of all tool inputs, outputs, and latencies. |
 
 > **Note:** This is not a substitute for proper RBAC.
->           Use a least-privilege kubeconfig.
->           The copilot inherits whatever permissions your kubectl context has.
+> Use a least-privilege kubeconfig.
+> The copilot inherits whatever permissions your kubectl context has.
 
 ---
 
-##  Configuration
+## ⚙️ Configuration
 
 Default config is created at `~/.config/bashops-agent/config.yaml` by running `bashops init`:
 
@@ -214,9 +192,11 @@ llm:
   timeout_seconds: 120
 
 safety:
-  read_only: true
+  read_only: false
   require_confirmation: true
   audit_log: true
+  rationale_required: true 
+  
   kubectl_allowed_verbs:
     - get
     - describe
@@ -224,15 +204,23 @@ safety:
     - top
     - explain
     - version
+  
   shell_allowed_cmds:
     - journalctl
-    - systemctl
+    - systemctl status
     - ps
     - ss
     - df
     - free
     - uptime
     - ip
+  
+  shell_mutative_cmds:
+    - systemctl restart
+    - systemctl stop
+    - ufw
+    - iptables
+    - kill
 ```
 
 ---
@@ -285,12 +273,13 @@ See [docs/rocm-setup.md](docs/rocm-setup.md) for the full setup guide from scrat
 - [Adding a custom tool](docs/custom-tools.md)
 - [Configuration reference](docs/configuration.md)
 - [Grafana Dashboards](docs/grafana-dashboards.md)
+
 ---
 
 ## 🛠️ Development
 
 ```bash
-git clone https://github.com/lsalazarm-sec/bashops-agent.git
+git clone [https://github.com/lsalazarm-sec/bashops-agent.git](https://github.com/lsalazarm-sec/bashops-agent.git)
 cd bashops-agent
 uv sync --all-extras --dev
 
