@@ -84,27 +84,26 @@ async def prometheus_query(
             if result_type == "matrix" and "values" in item:
                 try:
                     numeric_values = [float(v[1]) for v in item["values"]]
-                    clean_results.append({
-                        "target": target,
-                        "trend_min_cores": round(min(numeric_values), 4),
-                        "trend_max_cores": round(max(numeric_values), 4),
-                        "trend_avg_cores": round(sum(numeric_values) / len(numeric_values), 4),
-                    })
+                    clean_results.append(
+                        {
+                            "target": target,
+                            "trend_min_cores": round(min(numeric_values), 4),
+                            "trend_max_cores": round(max(numeric_values), 4),
+                            "trend_avg_cores": round(sum(numeric_values) / len(numeric_values), 4),
+                        }
+                    )
                 except (ValueError, TypeError):
                     pass
             elif result_type == "vector" and "value" in item:
                 try:
                     val = float(item["value"][1])
-                    clean_results.append({
-                        "target": target,
-                        "current_value_cores": round(val, 4)
-                    })
+                    clean_results.append({"target": target, "current_value_cores": round(val, 4)})
                 except (ValueError, TypeError, IndexError):
                     pass
 
         # Pass the sterilized, strictly numeric list to the Pydantic model
         result = PrometheusResult(query=query, result_type=result_type, results=clean_results)
-        
+
         record(
             tool="prometheus",
             inputs={"query": query},
@@ -125,4 +124,3 @@ async def prometheus_query(
             duration_ms=duration_ms,
         )
         return error
-

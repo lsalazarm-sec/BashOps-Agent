@@ -37,7 +37,11 @@ async def shell_run(
     ],
     args: Annotated[list[str], Field(description="Arguments to pass to the binary.")],
     rationale: Annotated[
-        str, Field(description="Detailed engineering justification for the command. Required for mutative actions.", default="")
+        str,
+        Field(
+            description="Detailed engineering justification for the command. Required for mutative actions.",
+            default="",
+        ),
     ],
     settings: Settings,
 ) -> ShellResult | ShellBlocked:
@@ -46,7 +50,7 @@ async def shell_run(
 
     # 1. Determine the command classification
     is_read_only = binary in settings.safety.shell_allowed_cmds
-    
+
     # Using getattr safely in case the Pydantic settings model isn't updated yet
     mutative_cmds = getattr(settings.safety, "shell_mutative_cmds", [])
     is_mutative = binary in mutative_cmds
@@ -65,7 +69,7 @@ async def shell_run(
                 reason="Execution Blocked: Agent is in read-only mode. Restart with --respond flag to allow changes.",
                 attempted_command=cmd_str,
             )
-        
+
         rationale_required = getattr(settings.safety, "rationale_required", True)
         if rationale_required and not rationale.strip():
             return ShellBlocked(
@@ -78,7 +82,7 @@ async def shell_run(
             console.print("\n[bold yellow]⚠️  Action Authorization Required[/bold yellow]")
             console.print(f"[bold cyan]Proposed Command:[/bold cyan] {cmd_str}")
             console.print(f"[bold cyan]Rationale:[/bold cyan] {rationale}")
-            
+
             authorized = Confirm.ask("[bold red]Do you authorize this execution?[/bold red]")
             if not authorized:
                 return ShellBlocked(
@@ -118,7 +122,7 @@ async def shell_run(
         return_code=proc.returncode or 0,
         truncated=truncated,
     )
-    
+
     # 6. Audit logging
     record(
         tool="shell",
@@ -127,5 +131,5 @@ async def shell_run(
         success=result.return_code == 0,
         duration_ms=duration_ms,
     )
-    
+
     return result

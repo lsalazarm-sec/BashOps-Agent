@@ -175,7 +175,7 @@ async def ask(prompt: str, settings: Settings) -> str:
                 {
                     "role": "user",
                     "content": f"Tool output:\n{tool_output}\n\nNow write your final answer in markdown bullet points. Do not call any more tools.\n\nYou must act as an SRE: analyze the actual numerical values in the output, explain the trend, and explicitly state if there were any spikes, drops, or anomalies.",
-                }    
+                }
             )
         else:
             messages.append(

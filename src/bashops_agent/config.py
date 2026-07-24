@@ -28,15 +28,15 @@ class SafetyConfig(BaseModel):
     require_confirmation: bool = True
     audit_log: bool = True
     rationale_required: bool = True
-    
+
     kubectl_allowed_verbs: list[str] = Field(
         default_factory=lambda: ["get", "describe", "logs", "top", "explain", "version"]
     )
-    
+
     kubectl_mutative_verbs: list[str] = Field(
         default_factory=lambda: ["rollout", "scale", "delete", "apply", "cordon", "uncordon"]
     )
-    
+
     shell_allowed_cmds: list[str] = Field(
         default_factory=lambda: [
             "journalctl",
@@ -49,17 +49,12 @@ class SafetyConfig(BaseModel):
             "ip",
         ]
     )
-    
+
     shell_mutative_cmds: list[str] = Field(
-        default_factory=lambda: [
-            "systemctl restart",
-            "systemctl stop",
-            "ufw",
-            "iptables",
-            "kill"
-        ]
+        default_factory=lambda: ["systemctl restart", "systemctl stop", "ufw", "iptables", "kill"]
     )
-    
+
+
 class Settings(BaseModel):
     llm: LLMConfig = Field(default_factory=LLMConfig)
     safety: SafetyConfig = Field(default_factory=SafetyConfig)
