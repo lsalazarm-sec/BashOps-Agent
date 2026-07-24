@@ -24,7 +24,7 @@
 
 ## 🎬 Demo & Capabilities
 
-###  Command-Line Operations (CLI) & Safety Executions
+### Command-Line Operations (CLI) & Safety Executions
 
 The CLI mode is designed for quick, single-shot queries and immediate incident response.
 
@@ -50,8 +50,15 @@ The TUI provides a persistent conversational context for complex debugging sessi
 #### 1. System & Container Operations
 The agent can chain multiple commands, analyzing process trees and container states in a single cohesive response.
 
-![TUI System Docker](docs/demo/tui-system-docker.gif)
-> **Action:** Identifying top memory consumers using `ps` and verifying the Docker daemon health status.
+**System RAM & Process Analysis:**
+> **Prompt:** `What is eating my RAM?`
+
+![System RAM Demo](docs/demo/tui-system-ram.gif)
+
+**Docker Health Check:**
+> **Prompt:** `Is the docker service healthy?`
+
+![Docker Health Demo](docs/demo/tui-docker-health.gif)
 
 #### 2. Kubernetes (K8s) Orchestration
 Seamlessly interacts with your clusters, fetching pod states, logs, and events to diagnose deployment issues.
@@ -80,13 +87,13 @@ A guided tour of the Wazuh Dashboard showing active agents, security events, sev
 ![Wazuh SIEM Security Overview](docs/demo/wazuh-kali-attack.gif)
 
 ### 3. Local LLM Security Query (`bashops ask`)
-Interacting with the local LLM agent to analyze the SIEM state and extract structured security tables by querying: `"what are the most critical recent security alerts in wazuh?"`.
+Interacting with the local LLM agent to analyze the SIEM state and extract structured security tables by querying: `"What are the most critical recent security alerts in wazuh?"`.
 
 ![BashOps Security Alert Query](docs/demo/bashopsquery-kali-attack.gif)
 
 ---
 
-##  Why this exists
+## 🤔 Why this exists
 
 Debugging infrastructure means context-switching between 8 terminal tabs before you even start reasoning about what went wrong — `kubectl`, `journalctl`, `top`, `ss`, logs, events, all at once.
 
@@ -98,7 +105,7 @@ Built and tested on an AMD Radeon RX 7700 XT with ROCm 7.x on Ubuntu 24.04.
 
 ---
 
-##  Features
+## ✨ Features
 
 - **Local LLM inference** — Qwen 2.5 Coder 14B running on your GPU via Ollama. Swap models with one config change.
 - **Real tool execution** — the agent actually runs `kubectl`, `journalctl`, `df`, `ps`, `ss`, and more. Not a wrapper around `kubectl explain`.
@@ -107,13 +114,13 @@ Built and tested on an AMD Radeon RX 7700 XT with ROCm 7.x on Ubuntu 24.04.
 - **TUI + CLI** — interactive Textual UI for conversations, one-shot CLI for scripting.
 - **ReAct reasoning loop** — the agent iterates: decide → execute tool → reason about output → decide again, until it has a complete answer.
 - **Linux-first, AMD-ready** — built on Ubuntu 24.04 with ROCm 7.x. Works with NVIDIA and CPU too.
-- **Prometheus integration** — query metrics and monitor cluster health via PromQL
-- **Grafana dashboards** — production-grade Kubernetes and Prometheus dashboards included out of the box
-- **Wazuh integration** — query connected security agents and recent alerts via natural language
+- **Prometheus integration** — query metrics and monitor cluster health via PromQL.
+- **Grafana dashboards** — production-grade Kubernetes and Prometheus dashboards included out of the box.
+- **Wazuh integration** — query connected security agents and recent alerts via natural language.
 
 ---
 
-##  Quickstart
+## 🚀 Quickstart
 
 ### Prerequisites
 
@@ -153,7 +160,7 @@ uv run bashops ask "Are all prometheus targets currently up?"
 uv run bashops ask "What are the most critical recent security alerts in wazuh?"
 ```
 
-📚 Looking for more? Check out the full BashOps Prompt Cheatsheet for advanced use cases across Kubernetes, Prometheus, Wazuh, and system administration.
+📚 **Looking for more?** Check out the full [BashOps Prompt Cheatsheet](docs/cheatsheet.md) for advanced use cases across Kubernetes, Prometheus, Wazuh, and system administration.
 
 ---
 
