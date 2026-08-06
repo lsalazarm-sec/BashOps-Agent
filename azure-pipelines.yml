@@ -1,0 +1,40 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    exclude:
+      - docs/**
+      - README.md
+
+pool:
+  name: "Default" # Pointing to the local agent GhostShell
+
+variables:
+  PYTHON_VERSION: "3.12"
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: "$(PYTHON_VERSION)"
+      addToPath: true
+    displayName: "Set up Python $(PYTHON_VERSION)"
+
+  - script: |
+      curl -LsSf https://astral.sh/uv/install.sh | sh
+      # ADO requires this special command ir order to update the PATH in the next steps
+      echo "##vso[task.prependpath]$HOME/.local/bin"
+    displayName: "Install uv"
+
+  - script: |
+      uv sync --all-extras --dev
+    displayName: "Install dependencies"
+
+  - script: |
+      uv run ruff check .
+      uv run ruff format --check .
+    displayName: "Run Linter & Formatting (Ruff)"
+
+  - script: |
+      uv run pytest -v
+    displayName: "Run Tests (Pytest)"
