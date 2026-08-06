@@ -11,6 +11,7 @@
 <img src="docs/icons/python.svg" width="28" height="28"> <img src="docs/icons/ollama.svg" width="28" height="28"> <img src="docs/icons/kubernetes.svg" width="28" height="28"> <img src="docs/icons/docker.svg" width="28" height="28"> <img src="docs/icons/prometheus.svg" width="28" height="28"> <img src="docs/icons/grafana.svg" width="28" height="28"> <img src="docs/icons/ubuntu.svg" width="28" height="28"> <img src="docs/icons/amd.svg" width="28" height="28"> <img src="docs/icons/github.svg" width="28" height="28">
 
 [![CI](https://github.com/lsalazarm-sec/bashops-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/lsalazarm-sec/bashops-agent/actions)
+[![Build Status](https://dev.azure.com/lsalazarm-sec/SecureOps-Infrastructure/_apis/build/status%2FSecureOps-Infrastructure?branchName=main)](https://dev.azure.com/lsalazarm-sec/SecureOps-Infrastructure/_build/latest?definitionId=1&branchName=main)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Ollama](https://img.shields.io/badge/Ollama-powered-purple.svg)](https://ollama.com)
