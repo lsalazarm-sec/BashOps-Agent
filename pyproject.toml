@@ -64,3 +64,9 @@ asyncio_mode = "auto"
 [tool.coverage.run]
 branch = true
 source = ["src/bashops_agent"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+    "ruff>=0.15.13",
+]
