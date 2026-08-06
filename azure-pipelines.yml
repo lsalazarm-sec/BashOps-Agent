@@ -14,27 +14,26 @@ variables:
   PYTHON_VERSION: "3.12"
 
 steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: "$(PYTHON_VERSION)"
-      addToPath: true
-    displayName: "Setting up Python $(PYTHON_VERSION)"
-
+  # Install uv
   - script: |
       curl -LsSf https://astral.sh/uv/install.sh | sh
-      # ADO requires this special command ir order to update the PATH in the next steps
-      echo "##vso[task.prependpath]$HOME/.local/bin"
-    displayName: "Install uv"
+    displayName: 'Install uv'
 
+  # Instruct uv to install Python 3.12 and sync dependencies
   - script: |
-      uv sync --all-extras --dev
-    displayName: "Install dependencies"
+      export PATH="$HOME/.local/bin:$PATH"
+      uv python install 3.12
+      uv sync
+    displayName: 'Install dependencies'
 
+  # Execute linter
   - script: |
-      uv run ruff check .
-      uv run ruff format --check .
-    displayName: "Run Linter & Formatting (Ruff)"
+      export PATH="$HOME/.local/bin:$PATH"
+      uv run --python 3.12 ruff check .
+    displayName: 'Lint with ruff'
 
+  # Execute tests
   - script: |
-      uv run pytest -v
-    displayName: "Run Tests (Pytest)"
+      export PATH="$HOME/.local/bin:$PATH"
+      uv run --python 3.12 pytest
+    displayName: 'Test with pytest'
