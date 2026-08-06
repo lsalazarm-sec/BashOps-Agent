@@ -23,7 +23,7 @@
 
 ---
 
-## 🎬 Demo & Capabilities
+##  Demo & Capabilities
 
 ### Command-Line Operations (CLI) & Safety Executions
 
@@ -44,7 +44,7 @@ When a prompt requires changing the system state, the agent enforces a strict **
 
 ---
 
-### 💻 Interactive Terminal Interface (TUI)
+###  Interactive Terminal Interface (TUI)
 
 The TUI provides a persistent conversational context for complex debugging sessions, allowing you to have a back-and-forth conversation with your infrastructure.
 
@@ -75,7 +75,7 @@ Instead of overwhelming the LLM with raw UNIX timestamps, BashOps Agent intercep
 
 ---
 
-## 🚨 Security & Threat Detection Demos
+##  Security & Threat Detection Demos
 
 ### 1. Kali Linux Reconnaissance & Hydra Attack
 Execution of port scanning and SSH brute-force attack vectors targeting the environment using Nmap and Hydra from Kali Linux.
@@ -94,7 +94,7 @@ Interacting with the local LLM agent to analyze the SIEM state and extract struc
 
 ---
 
-## 🤔 Why this exists
+##  Why this exists
 
 Debugging infrastructure means context-switching between 8 terminal tabs before you even start reasoning about what went wrong — `kubectl`, `journalctl`, `top`, `ss`, logs, events, all at once.
 
@@ -106,7 +106,7 @@ Built and tested on an AMD Radeon RX 7700 XT with ROCm 7.x on Ubuntu 24.04.
 
 ---
 
-## ✨ Features
+##  Features
 
 - **Local LLM inference** — Qwen 2.5 Coder 14B running on your GPU via Ollama. Swap models with one config change.
 - **Real tool execution** — the agent actually runs `kubectl`, `journalctl`, `df`, `ps`, `ss`, and more. Not a wrapper around `kubectl explain`.
@@ -121,7 +121,7 @@ Built and tested on an AMD Radeon RX 7700 XT with ROCm 7.x on Ubuntu 24.04.
 
 ---
 
-## 🚀 Quickstart
+##  Quickstart
 
 ### Prerequisites
 
@@ -165,7 +165,7 @@ uv run bashops ask "What are the most critical recent security alerts in wazuh?"
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 <img width="1744" height="1770" alt="Diagram" src="https://github.com/user-attachments/assets/452b9cc2-97df-4d9b-8bc1-c1d4692d0a57" />
 
@@ -176,7 +176,7 @@ See [docs/architecture.md](docs/architecture.md) for full design decisions and t
 
 ---
 
-## 🛡️ Safety model
+##  Safety model
 
 Security is a first-class concern. The agent cannot do anything you haven't explicitly permitted.
 
@@ -195,7 +195,7 @@ Security is a first-class concern. The agent cannot do anything you haven't expl
 
 ---
 
-## ⚙️ Configuration
+##  Configuration
 
 Default config is created at `~/.config/bashops-agent/config.yaml` by running `bashops init`:
 
@@ -241,7 +241,7 @@ safety:
 
 ---
 
-## 🖥️ AMD GPU setup (ROCm)
+##  AMD GPU setup (ROCm)
 
 Built and tested on:
 - **GPU:** AMD Radeon RX 7700 XT (gfx1101, 12GB VRAM)
@@ -253,7 +253,7 @@ See [docs/rocm-setup.md](docs/rocm-setup.md) for the full setup guide from scrat
 
 ---
 
-## 🗺️ Roadmap
+##  Roadmap
 
 ### v0.1 — Core agent (current)
 - [x] ReAct agent with kubectl and shell tools
@@ -282,7 +282,7 @@ See [docs/rocm-setup.md](docs/rocm-setup.md) for the full setup guide from scrat
 
 ---
 
-## 📖 Documentation
+##  Documentation
 
 - [Architecture](docs/architecture.md)
 - [ROCm setup guide](docs/rocm-setup.md)
