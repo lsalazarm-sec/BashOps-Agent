@@ -18,7 +18,7 @@ steps:
     inputs:
       versionSpec: "$(PYTHON_VERSION)"
       addToPath: true
-    displayName: "Set up Python $(PYTHON_VERSION)"
+    displayName: "Setting up Python $(PYTHON_VERSION)"
 
   - script: |
       curl -LsSf https://astral.sh/uv/install.sh | sh
