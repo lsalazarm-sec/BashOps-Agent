@@ -2,7 +2,7 @@
 
 # BashOps-Agent
 
-<img width="2752" height="1536" alt="Gemini_Generated_Image_dotws7dotws7dotw" src="https://github.com/user-attachments/assets/856072f1-95ab-4511-88b3-c7ff1a495600" />
+<img width="1536" height="1024" alt="Designer (1)" src="https://github.com/user-attachments/assets/bced84cb-7475-4ed7-aeea-ad88fc523199" />
 
 
 **Ask your infrastructure questions in plain text. Runs 100% locally on your GPU.**
