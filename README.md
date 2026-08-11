@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🤖 Bashops-Agent 🤖
+# BashOps-Agent
 
 <img width="2752" height="1536" alt="Gemini_Generated_Image_dotws7dotws7dotw" src="https://github.com/user-attachments/assets/856072f1-95ab-4511-88b3-c7ff1a495600" />
 
