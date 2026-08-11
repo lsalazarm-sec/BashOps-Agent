@@ -170,7 +170,8 @@ uv run bashops ask "What are the most critical recent security alerts in wazuh?"
 
 ##  Architecture
 
-<img width="1744" height="1770" alt="Diagram" src="https://github.com/user-attachments/assets/452b9cc2-97df-4d9b-8bc1-c1d4692d0a57" />
+<img width="2048" height="2080" alt="Gemini_Generated_Image_yxteusyxteusyxte" src="https://github.com/user-attachments/assets/8930a4a0-860e-4e20-95cb-2dfc4bbaa146" />
+
 
 The agent uses a **ReAct (Reason + Act) loop**, it reasons about what information it needs, calls a tool, gets real output, and reasons again. 
 This means answers are always grounded in actual system state, not hallucinated.
