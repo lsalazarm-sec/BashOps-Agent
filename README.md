@@ -151,18 +151,8 @@ bashops init
 
 ### One-shot query (Examples)
 
-```bash
-# System & Docker
-uv run bashops ask "What is eating my RAM right now?"
-uv run bashops ask "Is the docker service healthy?"
+<img width="1536" height="1024" alt="Cheatsheet" src="https://github.com/user-attachments/assets/752c712a-f5df-4e6e-8362-49dbde1be7f7" />
 
-# Kubernetes
-uv run bashops ask "Are there any pods continuously restarting in the default namespace?"
-
-# Observability & Security
-uv run bashops ask "Are all prometheus targets currently up?"
-uv run bashops ask "What are the most critical recent security alerts in wazuh?"
-```
 
 📚 **Looking for more?** Check out the full [BashOps Prompt Cheatsheet](docs/cheatsheet.md) for advanced use cases across Kubernetes, Prometheus, Wazuh, and system administration.
 
