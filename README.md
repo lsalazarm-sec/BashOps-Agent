@@ -136,9 +136,6 @@ Built and tested on an AMD Radeon RX 7700 XT with ROCm 7.x on Ubuntu 24.04.
 
 ### Install
 
-<img width="2064" height="672" alt="code" src="https://github.com/user-attachments/assets/1bf57d70-65d9-481c-a5be-7e47b2dc0a56" />
-
-
 ```bash
 # Pull the model (one-time, ~9GB)
 ollama pull qwen2.5-coder:14b
